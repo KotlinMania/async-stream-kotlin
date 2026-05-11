@@ -54,9 +54,9 @@ class StreamTest {
         assertEquals(listOf("hello"), s.toList())
         assertTrue(s.isTerminated())
 
-        // Once terminated, further collection emits nothing. The upstream
-        // `FusedStream` contract says repeated `poll_next` calls after
-        // termination keep returning `Poll::Ready(None)`; here the equivalent
+        // Once terminated, further collection emits nothing. Upstream's
+        // fused-stream contract says repeated pulls after termination keep
+        // returning the terminal "no more values" signal; here the equivalent
         // is that re-collecting an exhausted stream is a no-op.
         assertEquals(emptyList(), s.toList())
         assertTrue(s.isTerminated())

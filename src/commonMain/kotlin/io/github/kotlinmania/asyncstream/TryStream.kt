@@ -10,7 +10,7 @@ package io.github.kotlinmania.asyncstream
  * `Result.success(...)` by the caller and forwarded through [Sender.send].
  * Any [Throwable] that escapes the block is caught and re-emitted as a final
  * `Result.failure(t)` element, mirroring the upstream macro's behavior when
- * the block returns `Err(e)` via Rust's `?` propagation.
+ * the block returns a failure via Rust's try-propagation operator.
  *
  * # Examples
  *

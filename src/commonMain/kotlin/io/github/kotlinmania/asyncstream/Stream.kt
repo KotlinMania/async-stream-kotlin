@@ -99,8 +99,8 @@ package io.github.kotlinmania.asyncstream
  *
  * The stream uses a lightweight rendezvous channel to send values from the
  * producer to the collector. `send(value)` parks the producer coroutine until
- * the collector resumes it, mirroring the two-step park/resume hand-off the
- * upstream `Send<T>` future hand-codes around its thread-local cell.
+ * the collector resumes it, mirroring the two-step park/resume hand-off that
+ * upstream's send future hand codes around its thread-local cell.
  *
  * [Flow]: kotlinx.coroutines.flow.Flow
  */
