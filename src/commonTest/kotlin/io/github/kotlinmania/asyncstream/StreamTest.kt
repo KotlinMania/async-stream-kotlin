@@ -46,7 +46,11 @@ class StreamTest {
 
     @Test
     fun fused() = runTest {
-        val s = stream<String> {
+        // streamInternal returns the concrete AsyncStream so this test can
+        // observe its fused-after-exhaustion flag; the public `stream` builder
+        // erases to Flow<T>, but the fused behavior the public flow exposes is
+        // proven below by the empty-list-on-second-collect assertion.
+        val s = streamInternal<String> {
             send("hello")
         }
 
