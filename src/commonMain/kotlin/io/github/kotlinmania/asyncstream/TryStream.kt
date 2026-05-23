@@ -32,7 +32,14 @@ package io.github.kotlinmania.asyncstream
  * }
  * ```
  */
-fun <T> tryStream(block: suspend Sender<Result<T>>.() -> Unit): AsyncStream<Result<T>> {
+fun <T> tryStream(block: suspend Sender<Result<T>>.() -> Unit): kotlinx.coroutines.flow.Flow<Result<T>> =
+    tryStreamInternal(block)
+
+// commonTest reaches into the concrete [AsyncStream] via this internal factory
+// to assert the fused-after-exhaustion invariant. The public [tryStream]
+// builder erases the concrete type to [Flow] so the Swift Export bridge cannot
+// generate an `Any? -> AsyncStream<Any?>` unchecked cast.
+internal fun <T> tryStreamInternal(block: suspend Sender<Result<T>>.() -> Unit): AsyncStream<Result<T>> {
     val (tx, rx) = pair<Result<T>>()
     return AsyncStream(rx) {
         try {

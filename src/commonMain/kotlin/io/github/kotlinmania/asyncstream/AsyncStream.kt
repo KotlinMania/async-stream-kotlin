@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
  * polling body is unnecessary: Kotlin coroutines never expose raw self-pinning,
  * and the generator runs inside the collector's coroutine scope.
  */
-class AsyncStream<T> internal constructor(
+internal class AsyncStream<T> internal constructor(
     private val rx: Receiver<T>,
     private val generator: suspend () -> Unit,
 ) : Flow<T> {
