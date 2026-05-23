@@ -57,7 +57,11 @@ kotlin {
         binaries.framework { baseName = "AsyncStream"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "AsyncStream"; xcf.add(this) }
+        binaries.framework {
+            baseName = "AsyncStream"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
         binaries.framework { baseName = "AsyncStream"; xcf.add(this) }
