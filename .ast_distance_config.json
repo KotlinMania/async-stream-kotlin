@@ -1,5 +1,4 @@
 {
-  "parity_mode": false,
   "name": "async-stream-kotlin",
   "source": {
     "path": "tmp/async-stream/src",
