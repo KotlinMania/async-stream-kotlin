@@ -31,7 +31,9 @@ jobs:
       - name: Build and test Android targets
         run: >
           ./gradlew
+          setupAndroidSdk
           compileAndroidMain
           assembleUnitTest
           assembleAndroidTest
+          testAndroidHostTest
           --no-configuration-cache
