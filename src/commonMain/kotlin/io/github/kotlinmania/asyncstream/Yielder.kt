@@ -11,7 +11,9 @@ import kotlinx.coroutines.channels.Channel
  * replaces both with a rendezvous channel: each [send] call suspends the
  * producer coroutine until the collector pulls the value out of the channel.
  */
-class Sender<T> internal constructor(internal val channel: Channel<T>) {
+class Sender<T> internal constructor(
+    internal val channel: Channel<T>,
+) {
     /**
      * Send `value` downstream and suspend until the collector resumes the
      * producer.
@@ -38,7 +40,9 @@ class Sender<T> internal constructor(internal val channel: Channel<T>) {
  * value, are Rust-only plumbing for the raw-pointer hand-off and have no
  * Kotlin counterpart: the channel rendezvous itself is the hand-off.
  */
-class Receiver<T> internal constructor(internal val channel: Channel<T>)
+class Receiver<T> internal constructor(
+    internal val channel: Channel<T>,
+)
 
 /**
  * Create a paired [Sender]/[Receiver] backed by a rendezvous channel.

@@ -9,20 +9,23 @@ import kotlin.test.assertEquals
 
 class ForAwaitTest {
     @Test
-    fun test() = runTest {
-        val s = stream<String> {
-            send("hello")
-            send("world")
+    fun test() =
+        runTest {
+            val s =
+                stream<String> {
+                    send("hello")
+                    send("world")
+                }
+
+            val s2 =
+                stream<String> {
+                    s.collect { x -> send(x + "!") }
+                }
+
+            val values: List<String> = s2.toList()
+
+            assertEquals(2, values.size)
+            assertEquals("hello!", values[0])
+            assertEquals("world!", values[1])
         }
-
-        val s2 = stream<String> {
-            s.collect { x -> send(x + "!") }
-        }
-
-        val values: List<String> = s2.toList()
-
-        assertEquals(2, values.size)
-        assertEquals("hello!", values[0])
-        assertEquals("world!", values[1])
-    }
 }

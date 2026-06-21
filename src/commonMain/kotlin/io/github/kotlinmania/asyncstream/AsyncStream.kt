@@ -50,13 +50,14 @@ internal class AsyncStream<T> internal constructor(
     override suspend fun collect(collector: FlowCollector<T>) {
         if (done) return
         coroutineScope {
-            val job = launch {
-                try {
-                    generator()
-                } finally {
-                    rx.channel.close()
+            val job =
+                launch {
+                    try {
+                        generator()
+                    } finally {
+                        rx.channel.close()
+                    }
                 }
-            }
             for (item in rx.channel) {
                 collector.emit(item)
             }
