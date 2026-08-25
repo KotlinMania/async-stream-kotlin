@@ -1,4 +1,4 @@
-// port-lint: source src/async_stream.rs
+// port-lint: source async_stream.rs
 package io.github.kotlinmania.asyncstream
 
 import kotlinx.coroutines.coroutineScope
