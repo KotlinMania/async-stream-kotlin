@@ -1,4 +1,4 @@
-// port-lint: source src/next.rs
+// port-lint: source next.rs
 package io.github.kotlinmania.asyncstream
 
 import kotlinx.coroutines.flow.Flow
