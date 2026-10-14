@@ -1,10 +1,20 @@
 // port-lint: source async_stream.rs
 package io.github.kotlinmania.asyncstream
 
+import io.github.kotlinmania.futures.FusedStream
+import io.github.kotlinmania.futures.Poll
+import io.github.kotlinmania.futures.SizeHint
+import io.github.kotlinmania.futures.TaskContext
+import io.github.kotlinmania.futures.Yield
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
+
+/**
+ * Item type of the stream.
+ */
+public typealias Item = Any?
 
 /**
  * Anonymous stream type returned by the [stream] and [tryStream] builders.
@@ -28,11 +38,33 @@ import kotlinx.coroutines.launch
 internal class AsyncStream<T> internal constructor(
     private val rx: Receiver<T>,
     private val generator: suspend () -> Unit,
-) : Flow<T> {
+) : Flow<T>,
+    FusedStream<T> {
     private var done: Boolean = false
 
+    companion object {
+        fun <T> new(rx: Receiver<T>, generator: suspend () -> Unit): AsyncStream<T> =
+            AsyncStream(rx, generator)
+    }
+
     /** Returns `true` once the generator has run to completion. */
-    fun isTerminated(): Boolean = done
+    override fun isTerminated(): Boolean = done
+
+    /**
+     * Poll the next item from this stream.
+     */
+    override fun pollNext(context: TaskContext): Poll<Yield<T>> {
+        if (done) return Poll.Ready(Yield.End)
+        val result = rx.channel.tryReceive()
+        return if (result.isSuccess) {
+            Poll.Ready(Yield.Value(result.getOrThrow()))
+        } else if (result.isClosed) {
+            done = true
+            Poll.Ready(Yield.End)
+        } else {
+            Poll.Pending
+        }
+    }
 
     /**
      * Drive the wrapped generator to completion, emitting each yielded value
@@ -69,8 +101,6 @@ internal class AsyncStream<T> internal constructor(
     /**
      * Upstream's size-hint helper reports an exact `(0, 0)` window once the
      * stream is terminated and an open `(0, unbounded)` window otherwise.
-     * Kotlin [Flow] has no equivalent reporting channel; callers that need the
-     * hint can branch on [isTerminated].
      */
-    fun sizeHint(): Pair<Int, Int?> = if (done) 0 to 0 else 0 to null
+    override fun sizeHint(): SizeHint = if (done) SizeHint(0, 0) else SizeHint(0, null)
 }

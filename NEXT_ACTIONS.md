@@ -5,13 +5,13 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 4/4 (100.0%)
-- **Function parity:** 5/11 matched (target 10) — 45.5%
-- **Class/type parity:** 2/8 matched (target 3) — 25.0%
-- **Combined symbol parity:** 7/19 matched (target 13) — 36.8%
-- **Average inline-code cosine:** 0.25 (function body across 4 matched files)
-- **Average documentation cosine:** 0.11 (doc text across 4 matched files)
+- **Function parity:** 11/11 matched (target 19) — 100.0%
+- **Class/type parity:** 8/8 matched (target 9) — 100.0%
+- **Combined symbol parity:** 19/19 matched (target 28) — 100.0%
+- **Average inline-code cosine:** 0.46 (function body across 4 matched files)
+- **Average documentation cosine:** 0.10 (doc text across 4 matched files)
 - **Cheat-zeroed Files:** 1
-- **Critical Issues:** 4 files with <0.60 function similarity
+- **Critical Issues:** 2 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -30,35 +30,35 @@ Every matched file is listed below with function and type symbol parity.
 ### 1. async_stream
 
 - **Target:** `asyncstream.AsyncStream`
-- **Similarity:** 0.36
+- **Similarity:** 0.73
 - **Dependents:** 1
-- **Priority Score:** 1030506.4
-- **Functions:** 2/4 matched (target 3)
-- **Missing functions:** `new`, `poll_next`
-- **Types:** 0/1 matched
-- **Missing types:** `Item`
+- **Priority Score:** 1000502.8
+- **Functions:** 4/4 matched (target 5)
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 2)
+- **Missing types:** _none_
 
 ### 2. next
 
 - **Target:** `asyncstream.Next`
-- **Similarity:** 0.38
+- **Similarity:** 0.60
 - **Dependents:** 1
-- **Priority Score:** 1030406.2
-- **Functions:** 1/2 matched (target 1)
-- **Missing functions:** `poll`
-- **Types:** 0/2 matched (target 0)
-- **Missing types:** `Next`, `Output`
+- **Priority Score:** 1000403.9
+- **Functions:** 2/2 matched (target 3)
+- **Missing functions:** _none_
+- **Types:** 2/2 matched
+- **Missing types:** _none_
 
 ### 3. yielder
 
 - **Target:** `asyncstream.Yielder`
-- **Similarity:** 0.28
+- **Similarity:** 0.50
 - **Dependents:** 0
-- **Priority Score:** 61007.2
-- **Functions:** 2/5 matched (target 2)
-- **Missing functions:** `poll`, `enter`, `drop`
-- **Types:** 2/5 matched (target 2)
-- **Missing types:** `Enter`, `Send`, `Output`
+- **Priority Score:** 1005.0
+- **Functions:** 5/5 matched (target 7)
+- **Missing functions:** _none_
+- **Types:** 5/5 matched
+- **Missing types:** _none_
 
 ### 4. lib
 
