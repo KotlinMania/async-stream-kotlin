@@ -89,6 +89,27 @@ package io.github.kotlinmania.asyncstream
  * carrying the value yielded and `Result.failure` carrying any propagated
  * error.
  *
+ * ```kotlin
+ * import io.github.kotlinmania.asyncstream.tryStream
+ * import kotlinx.coroutines.flow.Flow
+ * import kotlinx.coroutines.flow.collect
+ * import kotlinx.coroutines.runBlocking
+ *
+ * fun numbersOrError(): Flow<Result<Int>> = tryStream {
+ *     for (i in 0 until 5) {
+ *         if (i == 3) throw IllegalStateException("boom")
+ *         send(i)
+ *     }
+ * }
+ *
+ * fun main() = runBlocking {
+ *     numbersOrError().collect { result ->
+ *         result.onSuccess { println("got $it") }
+ *             .onFailure { println("failed with ${it.message}") }
+ *     }
+ * }
+ * ```
+ *
  * # Implementation
  *
  * The [stream] and [tryStream] builders are plain higher-order functions. The
