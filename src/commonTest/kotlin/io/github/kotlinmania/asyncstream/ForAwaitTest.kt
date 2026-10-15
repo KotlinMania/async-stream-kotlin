@@ -1,7 +1,6 @@
 // port-lint: source tests/for_await.rs
 package io.github.kotlinmania.asyncstream
 
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test

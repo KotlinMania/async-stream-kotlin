@@ -16,12 +16,16 @@ internal class Next<T>(
 ) {
     fun poll(context: TaskContext): Poll<T?> =
         when (val y = stream.pollNext(context)) {
-            is Poll.Ready ->
+            is Poll.Ready -> {
                 when (val v = y.value) {
                     is Yield.Value -> Poll.Ready(v.value)
                     Yield.End -> Poll.Ready(null)
                 }
-            Poll.Pending -> Poll.Pending
+            }
+
+            Poll.Pending -> {
+                Poll.Pending
+            }
         }
 }
 

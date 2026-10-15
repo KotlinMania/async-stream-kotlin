@@ -66,7 +66,7 @@ class TryStreamTest {
                 tryStream {
                     val outer: Result<Result<Int>> = Result.success(Result.success(123))
                     val a = outer.getOrThrow().getOrThrow()
-                    for (unused in 1 until 10) {
+                    repeat(9) {
                         send(Result.success(a))
                     }
                 }
