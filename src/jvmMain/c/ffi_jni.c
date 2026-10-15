@@ -25,7 +25,7 @@
  * If they drift, `getpid()` compiles clean here and fails with
  * `java.lang.UnsatisfiedLinkError` only when jvmTest runs.
  *
- * For the template default the Kotlin bridge is
+ * For AsyncStream the optional Kotlin bridge is
  * `internal object FfiJni` in `io.github.kotlinmania.asyncstream.internal`,
  * hence the symbol below.
  */
@@ -48,9 +48,8 @@ extern "C" {
  * functions; there is no registration step beyond adding the JNIEXPORT
  * definition here and a matching `external fun` on the Kotlin bridge class.
  *
- * The `asyncstream` + `Ffi` segments of the symbol name are placeholders —
- * re-mangle together with the Kotlin bridge class per project (see header
- * comment above).
+ * The `asyncstream` package and `FfiJni` class segments match the Kotlin
+ * bridge. Keep them in sync if the package or bridge class is renamed.
  */
 JNIEXPORT jint JNICALL
 Java_io_github_kotlinmania_asyncstream_internal_FfiJni_getpid(

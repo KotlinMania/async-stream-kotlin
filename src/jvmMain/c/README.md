@@ -42,7 +42,7 @@ that Gradle cannot validate:
 
 - If you rename the Kotlin bridge class (`FfiJni` → `LibcJni`), every
   JNIEXPORT symbol here must change the class segment to match.
-- If you change the Kotlin package (e.g. from `...template.internal` to
+- If you change the Kotlin package (e.g. from `...asyncstream.internal` to
   `...libc.internal`), the package segment of every symbol must change.
 
 Getting either wrong compiles cleanly on both sides and fails only at
@@ -50,10 +50,10 @@ Getting either wrong compiles cleanly on both sides and fails only at
 you see that error, this file's symbol names vs the Kotlin bridge class
 are the first place to look.
 
-The template default pairs:
+The AsyncStream bridge pairs:
 
-- C symbol: `Java_io_github_kotlinmania_template_internal_FfiJni_getpid`
-- Kotlin: `internal object FfiJni` in `io.github.kotlinmania.template.internal`
+- C symbol: `Java_io_github_kotlinmania_asyncstream_internal_FfiJni_getpid`
+- Kotlin: `internal object FfiJni` in `io.github.kotlinmania.asyncstream.internal`
   declaring `@JvmStatic external fun getpid(): Int`
 
 ## Keeping the bridge invisible to Swift Export

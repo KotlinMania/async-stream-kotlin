@@ -15,4 +15,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "asyncstream-kotlin"
+rootProject.name = "async-stream-kotlin"

@@ -98,7 +98,8 @@ val ffiNameLower = ffiNameRaw.lowercase() // libc, png, ...
 val ffiDefFile = "src/nativeInterop/cinterop/$ffiName.def"
 val ffiWrapperBase = "${ffiNameLower}_wrapper" // libc_wrapper
 val ffiNapiDir = "native/node-$ffiNameLower" // native/node-libc
-val ffiNpmPackage = "@kotlinmania/$ffiNameLower-native-bindings" // @kotlinmania/libc-native-bindings
+val ffiNpmPackage =
+    optionalTrimmedProperty("project.ffi.npmPackage") ?: "@kotlinmania/$ffiNameLower-native-bindings"
 
 if (nativeFfiEnabled || jvmFfiEnabled || napiFfiEnabled) {
     println("FFI channels enabled: native=$nativeFfiEnabled jvm=$jvmFfiEnabled napi=$napiFfiEnabled name=$ffiName")

@@ -1,4 +1,3 @@
-// port-lint: source N/A
 /**
  * N-API native bindings for JS/WASM targets — Kotlin side.
  *

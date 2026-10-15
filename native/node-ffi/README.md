@@ -1,4 +1,4 @@
-# N-API Native Bindings (template)
+# AsyncStream N-API Native Bindings
 
 Shared C++ N-API addon providing direct C library bindings for the project's
 Kotlin/JS and Kotlin/WASM targets. Transliterated from the libc-kotlin pattern
@@ -78,4 +78,6 @@ To generalize this directory for a crate (e.g. a `png` port with
    renamed, `@JsModule` string → `@kotlinmania/png-native-bindings`
 7. `build.gradle.kts`: task names carry the capitalized lib name
    (`buildNodeFfi` → `buildNodePng`); they derive from `project.ffi.name`,
-   so a single property change cascades.
+   so a single property change cascades. The optional `project.ffi.npmPackage`
+   property selects the npm identity independently; this project uses
+   `@kotlinmania/asyncstream-native-bindings`.

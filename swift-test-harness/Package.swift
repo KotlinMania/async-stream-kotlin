@@ -23,7 +23,7 @@ let package = Package(
             linkerSettings: [
                 .unsafeFlags([
                     "-L", "../build/swift-test",
-                    "-llibAsyncStream",
+                    "-lAsyncStream",
                     "-F", "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
                     "-Xlinker", "-rpath", "-Xlinker", "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
                     "-Xlinker", "-rpath", "-Xlinker", "/Library/Developer/CommandLineTools/Library/Developer/usr/lib",
