@@ -26,7 +26,7 @@
  * `Java_<namespace_with_underscores>_internal_<Lib>Jni_<method>`. The two
  * sides must move atomically — drift fails only at jvmTest time.
  */
-package io.github.kotlinmania.template.internal
+package io.github.kotlinmania.asyncstream.internal
 
 internal object FfiJni {
     init {
@@ -39,7 +39,7 @@ internal object FfiJni {
 
     /**
      * Returns the calling process ID. Hello-world export matching
-     * `Java_io_github_kotlinmania_template_internal_FfiJni_getpid` in
+     * `Java_io_github_kotlinmania_asyncstream_internal_FfiJni_getpid` in
      * `src/jvmMain/c/ffi_jni.c`.
      */
     @JvmStatic

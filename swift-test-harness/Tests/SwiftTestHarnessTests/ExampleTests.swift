@@ -1,21 +1,21 @@
 #if canImport(Testing)
 import Testing
-import Template
+import AsyncStream
 
-@Suite("Template Swift Export Tests")
-struct TemplateExportTests {
-    @Test("Template swift module imported cleanly")
+@Suite("AsyncStream Swift Export Tests")
+struct AsyncStreamExportTests {
+    @Test("AsyncStream swift module imported cleanly")
     func testSwiftModuleLoads() throws {
-        #expect(Bool(true), "Template swift module imported cleanly")
+        #expect(Bool(true), "AsyncStream swift module imported cleanly")
     }
 }
 #elseif canImport(XCTest)
 import XCTest
-import Template
+import AsyncStream
 
-final class TemplateExportTests: XCTestCase {
+final class AsyncStreamExportTests: XCTestCase {
     func testSwiftModuleLoads() throws {
-        XCTAssertTrue(true, "Template swift module imported cleanly")
+        XCTAssertTrue(true, "AsyncStream swift module imported cleanly")
     }
 }
 #endif

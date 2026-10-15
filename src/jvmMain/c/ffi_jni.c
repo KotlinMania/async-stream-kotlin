@@ -26,7 +26,7 @@
  * `java.lang.UnsatisfiedLinkError` only when jvmTest runs.
  *
  * For the template default the Kotlin bridge is
- * `internal object FfiJni` in `io.github.kotlinmania.template.internal`,
+ * `internal object FfiJni` in `io.github.kotlinmania.asyncstream.internal`,
  * hence the symbol below.
  */
 #include <jni.h>
@@ -48,12 +48,12 @@ extern "C" {
  * functions; there is no registration step beyond adding the JNIEXPORT
  * definition here and a matching `external fun` on the Kotlin bridge class.
  *
- * The `template` + `Ffi` segments of the symbol name are placeholders —
+ * The `asyncstream` + `Ffi` segments of the symbol name are placeholders —
  * re-mangle together with the Kotlin bridge class per project (see header
  * comment above).
  */
 JNIEXPORT jint JNICALL
-Java_io_github_kotlinmania_template_internal_FfiJni_getpid(
+Java_io_github_kotlinmania_asyncstream_internal_FfiJni_getpid(
     JNIEnv* env, jclass clazz) {
     (void)env; (void)clazz;
 #ifndef _WIN32

@@ -11,7 +11,7 @@ targets load.
 ```
 native/node-ffi/
 ├── binding.gyp            — node-gyp build config (one target, ffi_native)
-├── package.json           — npm package (@kotlinmania/template-native-bindings)
+├── package.json           — npm package (@kotlinmania/asyncstream-native-bindings)
 ├── index.js               — loader (Release → Debug fallback)
 └── src/
     └── ffi_bindings.cpp   — module init + hello-world getpid export
@@ -51,14 +51,14 @@ If you rename the target to start with "lib" (e.g. `libpng_native`), update
 The Kotlin jsMain side declares the module as an external interface:
 
 ```kotlin
-@JsModule("@kotlinmania/template-native-bindings")
-public external interface TemplateNativeBindings {
+@JsModule("@kotlinmania/asyncstream-native-bindings")
+public external interface AsyncStreamNativeBindings {
     public fun getpid(): Int
 }
 ```
 
 The Gradle `copyNodeFfi` task copies the built addon into
-`build/js/node_modules/@kotlinmania/template-native-bindings/` so Node's
+`build/js/node_modules/@kotlinmania/asyncstream-native-bindings/` so Node's
 resolver finds it when the `@JsModule` annotation is consulted during
 `jsNodeTest` / `wasmJsNodeTest`.
 
@@ -74,7 +74,7 @@ To generalize this directory for a crate (e.g. a `png` port with
 5. `src/ffi_bindings.cpp`: rename + replace the `getpid` registration; the
    `NODE_API_MODULE(<target>, Init)` first argument must match binding.gyp's
    `target_name`
-6. Kotlin: `TemplateNativeBindings.kt` → `PngNativeBindings.kt`, interface
+6. Kotlin: `AsyncStreamNativeBindings.kt` → `PngNativeBindings.kt`, interface
    renamed, `@JsModule` string → `@kotlinmania/png-native-bindings`
 7. `build.gradle.kts`: task names carry the capitalized lib name
    (`buildNodeFfi` → `buildNodePng`); they derive from `project.ffi.name`,

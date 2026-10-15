@@ -17,7 +17,7 @@
  * - noStringConversion: list any wrapper function returning char* that must
  *   NOT be auto-converted to Kotlin String (because the pointer aliases the
  *   input or must be freed). See kotlinmania/libc-kotlin for the proven
- *   reason set. Template default: ffi_errno (returns an int*, not char*).
+ *   reason set. AsyncStream default: ffi_errno (returns an int*, not char*).
  *
  * Rename this file to <ProjectFfiName>.def to match project.ffi.name.
  */
