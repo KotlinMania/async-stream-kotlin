@@ -1,4 +1,4 @@
-// port-lint: source tests/stream.rs
+// port-lint: tests tests/stream.rs
 package io.github.kotlinmania.asyncstream
 
 import kotlinx.coroutines.async
@@ -250,4 +250,9 @@ class StreamTest {
     // would test a different invariant (sequential collapse of pre-launched
     // coroutines, not Pin-aware future polling). Left unported per AGENTS.md
     // §6 and feedback_dont_infer_ports.
+
+    // Upstream `test` runs trybuild::TestCases compile_fail on tests/ui/*.rs,
+    // which tests Rust proc-macro syntax failures (e.g. yielding outside stream macro).
+    // In Kotlin, send is statically scoped to the Sender<T> lambda receiver and
+    // enforced by the Kotlin compiler.
 }

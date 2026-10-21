@@ -5,6 +5,8 @@ import AsyncStream
 struct AsyncStreamExportTests {
     @Test("Swift module imports and basic types are reachable")
     func swiftModuleLoads() throws {
-        #expect(Bool(true))
+        #expect(Output.self == Void.self)
+        #expect(String(describing: Receiver.self).contains("Receiver"))
+        #expect(String(describing: Sender.self).contains("Sender"))
     }
 }

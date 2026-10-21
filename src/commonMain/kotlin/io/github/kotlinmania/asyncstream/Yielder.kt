@@ -37,16 +37,16 @@ class Sender<T> internal constructor(
     internal val channel: Channel<T>,
 ) {
     /**
-     * Send `value` downstream and suspend until the collector resumes the producer.
-     */
-    suspend fun send(value: T) {
-        channel.send(value)
-    }
-
-    /**
      * Send a value returning a Send future.
      */
     internal fun sendFuture(value: T): Send<T> = Send(value, this)
+}
+
+/**
+ * Send `value` downstream and suspend until the collector resumes the producer.
+ */
+suspend fun <T> Sender<T>.send(value: T) {
+    channel.send(value)
 }
 
 /**
