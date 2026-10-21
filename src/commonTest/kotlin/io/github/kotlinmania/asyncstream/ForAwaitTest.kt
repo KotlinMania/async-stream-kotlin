@@ -1,4 +1,4 @@
-// port-lint: source tests/for_await.rs
+// port-lint: tests tests/for_await.rs
 package io.github.kotlinmania.asyncstream
 
 import kotlinx.coroutines.flow.collect

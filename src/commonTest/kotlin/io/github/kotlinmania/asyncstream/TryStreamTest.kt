@@ -1,4 +1,4 @@
-// port-lint: source tests/try_stream.rs
+// port-lint: tests tests/try_stream.rs
 package io.github.kotlinmania.asyncstream
 
 import kotlinx.coroutines.flow.Flow
@@ -76,6 +76,20 @@ class TryStreamTest {
             for (v in values) {
                 assertEquals(123, v.getOrThrow())
             }
+        }
+
+    @Test
+    fun issue65() =
+        runTest {
+            fun issue65Stream(): Flow<Result<Int>> =
+                tryStream {
+                    val res: Result<Int> = Result.failure(IllegalStateException("issue 65"))
+                    send(Result.success(res.getOrThrow()))
+                }
+
+            val values = issue65Stream().toList()
+            assertEquals(1, values.size)
+            assertTrue(values[0].isFailure)
         }
 }
 
